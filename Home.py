@@ -36,9 +36,8 @@ if 'color' not in st.session_state:
 
 
 # st.session_state = {"sex": st.session_state['sex'], "weight": st.session_state['weight'], "height": st.session_state['height']}
-st.session_state["sex"] = st.selectbox("Sex:", ["Man", "Woman"], [1, 0].index(st.session_state['sex']), key="sex")
+st.session_state["sex"] = st.selectbox("Sex:", ["Man", "Woman"], ["Man", "Woman"].index(st.session_state['sex']), key="sex")
 st.session_state["weight"] = st.number_input("Weight (kg):", 30.0, 200.0, st.session_state['weight'], 0.1, key="weight")
 st.session_state["height"] = st.number_input("Height (m):", 1.0, 2.5, st.session_state['height'], key="height")
 st.session_state["age"] = st.number_input("Age (years):", 18.0, 120.0, st.session_state['age'], 1.0, key="age")
 st.session_state['avatar_color'] = st.color_picker("Avatar Color:", st.session_state['avatar_color'])
-
