@@ -14,7 +14,7 @@ if "sund" not in os.listdir('./custom_package'):
 sys.path.append('./custom_package')
 import sund
 
-from utils import drink_specifier, flatten, simulate, add_line, set_figure_layout, get_complementary_color
+from utils import drink_specifier, flatten, simulate, add_line, set_figure_layout, get_complementary_color, set_default_session_state
 # st.elements.utils._shown_default_value_warning=True # This is not a good solution, but it hides the warning of using default values and sessionstate api
 
 # Setup the models
@@ -41,14 +41,7 @@ You will be able to specify the body size of the individual and the amount of al
 # Anthropometrics            
     
 # Shared variables between the pages
-if 'sex' not in st.session_state:
-    st.session_state['sex'] = 'Man'
-if 'weight' not in st.session_state:
-    st.session_state['weight'] = 70.0
-if 'height' not in st.session_state:
-    st.session_state['height'] = 1.72
-if 'age' not in st.session_state:
-    st.session_state['age'] = 30.0
+set_default_session_state(st.session_state)
 
 anthropometrics = {"sex": st.session_state['sex'], 
                    "weight": st.session_state['weight'], 
@@ -61,7 +54,7 @@ st.divider()
 stim, extra_time = drink_specifier()
 
 # Setup meals
-st.subheader("Specifying the meals")
+st.header("Specifying the meals")
 
 start_time = 0.0
 
@@ -88,13 +81,31 @@ sim_results_no_meal = simulate(model, anthropometrics, stim, extra_time=extra_ti
 stim["kcal_solid"] =  {"t": meal_times, "f": meal_kcals}
 sim_results_meal = simulate(model, anthropometrics, stim, extra_time=extra_time)
 
+
+st.markdown("""## Questions to reflect over before simulating
+- Do you think there will be a difference between drinking on an empty stomach or after having eating?
+- If so, what do you think will be the difference?
+            
+When you are ready, press the "Show simulation" button below to see the results.
+""")
+
+
+page_button_key = 'show_simulation_3'
+
+# Initialize session state for show_simulation if not already set
+if page_button_key not in st.session_state:
+    st.session_state[page_button_key] = False
+
+# Button to toggle show_simulation state
+if st.button("Show simulation"):
+    st.session_state[page_button_key] = True
+
+
 # Plotting the drinks
-
-show_simulation = st.button("Show simulation")
-
-if show_simulation:
-    st.subheader("Plotting the time course given the alcoholic drinks specified")
-    feature = st.selectbox("Feature of the model to plot", model_features)
+if st.session_state[page_button_key]:
+    st.divider()
+    st.subheader("Visualizing the differences in blood alcohol concentration when drinking on an empty stomach and after a meal")
+    feature = st.selectbox("Feature of the model to plot", model_features, model_features.index("Blood alcohol concentration (‰)"))
     # st.line_chart(sim_results, x="Time", y=feature)
 
     fig = go.Figure()
@@ -104,3 +115,9 @@ if show_simulation:
     set_figure_layout(fig, feature)
 
     st.plotly_chart(fig)
+
+    st.markdown(""" ## Questions to reflect over after simulating
+- Was there a difference in the blood alcohol concentration when drinking on an empty stomach compared to after a meal?
+- What happens if you consume the meal after having stopped drinking? 
+- What happens if you consume the meal in the middle of the drinking session?        
+""")

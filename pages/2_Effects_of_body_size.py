@@ -14,7 +14,7 @@ if "sund" not in os.listdir('./custom_package'):
 sys.path.append('./custom_package')
 import sund
 
-from utils import drink_specifier, flatten, simulate, setup_model, add_line, set_figure_layout
+from utils import drink_specifier, flatten, simulate, setup_model, add_line, set_figure_layout, set_default_session_state
 
 # st.elements.utils._shown_default_value_warning=True # This is not a good solution, but it hides the warning of using default values and sessionstate api
 
@@ -33,16 +33,8 @@ You will be able to specify the body size of the individual and the amount of al
 # Anthropometrics            
     
 # Shared variables between the pages
-if 'sex' not in st.session_state:
-    st.session_state['sex'] = 'Man'
-if 'weight' not in st.session_state:
-    st.session_state['weight'] = 70.0
-if 'height' not in st.session_state:
-    st.session_state['height'] = 1.72
-if 'age' not in st.session_state:
-    st.session_state['age'] = 30.0
-if 'avatar_color' not in st.session_state:
-    st.session_state['avatar_color'] = '#A757D6'  # Default color
+
+set_default_session_state(st.session_state)
 
 anthropometrics = {"sex": st.session_state['sex'],
                    "weight": st.session_state['weight'], 
@@ -88,18 +80,26 @@ st.markdown("""## Questions to reflect over before simulating
 When you are ready, press the "Show simulation" button below to see the results.
 """)
 
-show_simulation = st.button("Show simulation")
 
 # Simulate the three avatars
 sim_results = simulate(model, anthropometrics, stim, extra_time=extra_time)
 sim_results_large_man = simulate(model, avatar_large_male, stim, extra_time=extra_time)
 sim_results_small_woman = simulate(model, avatar_small_female, stim, extra_time=extra_time)
 
+page_button_key = 'show_simulation_1'
 
-if show_simulation:
+# Initialize session state for show_simulation if not already set
+if page_button_key not in st.session_state:
+    st.session_state[page_button_key] = False
+
+# Button to toggle show_simulation state
+if st.button("Show simulation"):
+    st.session_state[page_button_key] = True
+
+if st.session_state[page_button_key]:
     st.divider()
     st.subheader("Visualizing the differences in alcohol dynamics")
-    feature = st.selectbox("Feature of the model to plot", model_features)
+    feature = st.selectbox("Feature of the model to plot", model_features, model_features.index("Blood alcohol concentration (‰)"))
 
     fig = go.Figure()
     add_line(fig, "Your avatar", sim_results, feature, st.session_state['avatar_color'], showlegend=True)
@@ -110,7 +110,6 @@ if show_simulation:
 
     st.plotly_chart(fig)
 
-    st.divider()
     st.markdown(""" ## Questions to reflect over after simulating
 - What happened when the three avatars consumed the same amount of alcohol? Did they get the same blood alcohol concentration?
 - Did you expect this result? Why or why not?         
