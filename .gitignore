@@ -2,3 +2,4 @@
 *.png
 !assets/*.png
 custom_package/
+__pycache__/
