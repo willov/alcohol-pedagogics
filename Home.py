@@ -10,7 +10,7 @@ if "sund" not in os.listdir('./custom_package'):
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://www.isbgroup.eu/sund-toolbox/releases/sund-1.2.22.tar.gz'])
 
 
-st.title("Exercises to visualize different risk related to alcohol consumption")
+st.title("Visualizing different risks related to alcohol consumption")
 st.markdown("""These exercises are ment to showcase different risks related to alcohol consumption. The intent is to bring awareness to the risks involved to improve the health of the population. 
             
 You will find the exercises in the panels on the left side of the screen.
