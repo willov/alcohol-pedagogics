@@ -88,50 +88,20 @@ def get_complementary_color(hex_color):
     # Convert RGB back to hex
     return f'#{r_complementary:02x}{g_complementary:02x}{b_complementary:02x}'
 
+drink_defaults = {
+"Beer" : {"concentration": 5.0, "volume": 0.33, "kcal": 45.0, "length": 20.0},
+"Wine" : {"concentration": 11.0, "volume": 0.15, "kcal": 85.0, "length": 20.0},
+"Spirits" : {"concentration": 40.0, "volume": 0.04, "kcal": 70.0, "length": 1.0/60}
+}
 
-def drink_specifier():
+def setup_drinks(drink_times, n_drinks, concentration, volume, kcal, length):
 
-    st.header("Specifying the alcoholic drinks")
+    drink_lengths = [0]+[length*on for _ in range(n_drinks) for on in [1 , 0]]
 
-    n_drinks = st.slider("Number of drinks:", 1, 15, 3)
-
-    drink_spacing = st.slider("Time between the drinks (minutes):", 1, 120, 20,1)
-    start_time = 0
-
-    drink_type = st.selectbox("Drink type", ["Beer (5 % v/v, 33 cl, 20 minutes consumption)", "Wine (12 % v/v, 15 cl, 20 minutes consumption)", "Spirits (40 % v/v, 4 cl, 1 minutes consumption)", "Custom"])
-
-    if drink_type.split(' ')[0] == "Beer":
-        drink_concentrations = [5.0]*n_drinks
-        drink_volumes = [0.33]*n_drinks
-        drink_kcals = [45.0]*n_drinks
-        drink_length = 20.0
-    elif drink_type.split(' ')[0] == "Wine":
-        drink_concentrations = [12.0]*n_drinks
-        drink_volumes = [0.15]*n_drinks
-        drink_kcals = [85.0]*n_drinks
-        drink_length = 20.0
-    elif drink_type.split(' ')[0] == "Spirits":
-        drink_concentrations = [40.0]*n_drinks
-        drink_volumes = [0.04]*n_drinks
-        drink_kcals = [70.0]*n_drinks
-        drink_length = 1.0
-    elif drink_type == "Custom":
-        drink_concentrations = [st.number_input("Concentration of drink (%): ", 0.0, 100.0, 5.0, 0.01)]*n_drinks
-        drink_volumes = [st.number_input("Volume of drink (L): ", 0.0, 24.0, 0.33, 0.1)]*n_drinks
-        drink_kcals = [st.number_input("Kcal of the drink (kcal): ", 0.0, 1000.0, 45.0, 1.0)]*n_drinks
-        drink_length = st.number_input("Drink length (min): ", 0.0, 240.0, 20.0, 0.1)
-
-    extra_time = st.number_input("Additional time to simulate after last drink (h):", 0.0, 100.0, 12.0, 0.1)
-
-    drink_times = [start_time]+[n*(drink_length/60+drink_spacing/60) for n in range(1,n_drinks)]
-    
-    drink_lengths = [0]+[drink_length*on for _ in range(n_drinks) for on in [1 , 0]]
-
-    EtOH_conc = [0]+[c*on for c in drink_concentrations for on in [1 , 0]]
-    vol_drink_per_time = [0]+[v/drink_length*on if drink_length>0 else 0 for v in drink_volumes for on in [1 , 0]]
-    kcal_liquid_per_vol = [0]+[k/v*on if v>0 else 0 for v,k in zip(drink_volumes, drink_kcals) for on in [1 , 0]]
-    t = [t+(drink_length/60)*on for t in drink_times for on in [0,1]]
-
+    EtOH_conc = [0]+[concentration*on for _ in range(n_drinks) for on in [1 , 0]]
+    vol_drink_per_time = [0]+[volume/length*on if length>0 else 0 for _ in range(n_drinks) for on in [1 , 0]]
+    kcal_liquid_per_vol = [0]+[kcal/volume*on if volume>0 else 0 for _ in range(n_drinks) for on in [1 , 0]]
+    t = [t+(length/60)*on for t in drink_times for on in [0,1]]
 
     # Setup stimulation to the model
 
@@ -142,6 +112,38 @@ def drink_specifier():
         "drink_length": {"t": t, "f": drink_lengths},
         "kcal_solid": {"t": [0], "f": [0, 0]},
         }
+    return stim
+
+def drink_specifier():
+
+    st.header("Specifying the alcoholic drinks")
+
+    n_drinks = st.slider("Number of drinks:", 1, 15, 3)
+
+    drink_spacing = st.slider("Time between the drinks (minutes):", 1, 120, 20,1)
+    start_time = 0
+
+    drink_type_selection = st.selectbox("Drink type", ["Beer (5 % v/v, 33 cl, 20 minutes consumption)", "Wine (11 % v/v, 15 cl, 20 minutes consumption)", "Spirits (40 % v/v, 4 cl, 1 second consumption)", "Custom"])
+
+    drink_type = drink_type_selection.split(' ')[0]
+
+    if drink_type in ["Beer", "Wine", "Spirits"]:
+        drink_concentration = drink_defaults[drink_type]["concentration"]
+        drink_volume = drink_defaults[drink_type]["volume"]
+        drink_kcal = drink_defaults[drink_type]["kcal"]
+        drink_length = drink_defaults[drink_type]["length"]
+    elif drink_type == "Custom":
+        drink_concentration = st.number_input("Concentration of drink (%): ", 0.0, 100.0, 5.0, 0.01)
+        drink_volume = st.number_input("Volume of drink (L): ", 0.0, 24.0, 0.33, 0.1)
+        drink_kcal = st.number_input("Kcal of the drink (kcal): ", 0.0, 1000.0, 45.0, 1.0)
+        drink_length = st.number_input("Drink length (min): ", 0.0, 240.0, 20.0, 0.1)
+
+    extra_time = st.number_input("Additional time to simulate after last drink (h):", 0.0, 100.0, 12.0, 0.1)
+
+    drink_times = [start_time]+[n*(drink_length/60+drink_spacing/60) for n in range(1,n_drinks)]
+    
+    stim = setup_drinks(drink_times, n_drinks, drink_concentration, drink_volume, drink_kcal, drink_length)
+
     return stim, extra_time
 
 

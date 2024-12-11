@@ -24,14 +24,12 @@ model, model_features = setup_model('alcohol_model')
 
 # Start the app
 
-st.title("Differences as an effect of body size")
+st.title("Personal differences (as an effect of body size)")
 st.markdown("""In social situations, such as in dinners, it is common that the same amount of alcohol is given to all participants. However, the effect of alcohol on is highly personal for each individual. This exercise will show the differences in the time course of alcohol in the body depending on the body size of the individual.
             
 You will be able to specify the body size of the individual and the amount of alcohol consumed. The time course of alcohol in the body will be plotted.
 """)
-   
-# Anthropometrics            
-    
+       
 # Shared variables between the pages
 
 set_default_session_state(st.session_state)

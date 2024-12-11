@@ -14,28 +14,20 @@ if "sund" not in os.listdir('./custom_package'):
 sys.path.append('./custom_package')
 import sund
 
-from utils import drink_specifier, flatten, simulate, add_line, set_figure_layout, get_complementary_color, set_default_session_state
+from utils import setup_model, drink_specifier, flatten, simulate, add_line, set_figure_layout, get_complementary_color, set_default_session_state
 # st.elements.utils._shown_default_value_warning=True # This is not a good solution, but it hides the warning of using default values and sessionstate api
 
 # Setup the models
-
-def setup_model(model_name):
-    sund.installModel(f"./models/{model_name}.txt")
-    model_class = sund.importModel(model_name)
-    model = model_class() 
-
-    features = model.featurenames
-    return model, features
 
 model, model_features = setup_model('alcohol_model')
 
 
 # Start the app
 
-st.title("Differences as an effect of body size")
-st.markdown("""In social situations, such as in dinners, it is common that the same amount of alcohol is given to all participants. However, the effect of alcohol on the body is different depending on the body size of the individual. This exercise will show the differences in the time course of alcohol in the body depending on the body size of the individual.
+st.title("Effects of meal consumption in combination with alcoholic drinks")
+st.markdown("""Since alcohol is consumed as a drink, the rate of appearance of alcohol in the blood is partially controlled by the rate of gastric emptying. In turn, the gastric emptying is partially controlled by the food and liquids consumed. 
             
-You will be able to specify the body size of the individual and the amount of alcohol consumed. The time course of alcohol in the body will be plotted.
+This exercise will show the differences in the time course of alcohol in the body depending on the consumption of a meal.
 """)
    
 # Anthropometrics            
