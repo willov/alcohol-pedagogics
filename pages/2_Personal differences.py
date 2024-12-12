@@ -96,8 +96,9 @@ if st.button("Show simulation"):
 
 if st.session_state[page_button_key]:
     st.divider()
-    st.subheader("Visualizing the differences in alcohol dynamics")
-    feature = st.selectbox("Feature of the model to plot", model_features, model_features.index("Blood alcohol concentration (‰)"))
+    st.subheader("Simulation of the differences in alcohol dynamics")
+    # feature = st.selectbox("Feature of the model to plot", model_features, model_features.index("Blood alcohol concentration (‰)"))
+    feature = "Blood alcohol concentration (‰)"
 
     fig = go.Figure()
     add_line(fig, "Your avatar", sim_results, feature, st.session_state['avatar_color'], showlegend=True)

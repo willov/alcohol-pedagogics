@@ -96,9 +96,9 @@ if st.button("Show simulation"):
 # Plotting the drinks
 if st.session_state[page_button_key]:
     st.divider()
-    st.subheader("Visualizing the differences in blood alcohol concentration when drinking on an empty stomach and after a meal")
-    feature = st.selectbox("Feature of the model to plot", model_features, model_features.index("Blood alcohol concentration (‰)"))
-    # st.line_chart(sim_results, x="Time", y=feature)
+    st.subheader("Simulation of the differences in blood alcohol concentration when drinking on an empty stomach and after a meal")
+    # feature = st.selectbox("Feature of the model to plot", model_features, model_features.index("Blood alcohol concentration (‰)"))
+    feature = "Blood alcohol concentration (‰)"
 
     fig = go.Figure()
     add_line(fig, "Without meal", sim_results_no_meal, feature, st.session_state['avatar_color'])
@@ -111,5 +111,6 @@ if st.session_state[page_button_key]:
     st.markdown(""" ## Questions to reflect over after simulating
 - Was there a difference in the blood alcohol concentration when drinking on an empty stomach compared to after a meal?
 - What happens if you consume the meal after having stopped drinking? 
-- What happens if you consume the meal in the middle of the drinking session?        
+- What happens if you consume the meal in the middle of the drinking session?
+- What happens if you consume a larger meal?    
 """)
