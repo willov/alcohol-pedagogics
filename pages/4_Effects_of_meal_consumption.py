@@ -58,7 +58,7 @@ n_meals = st.slider("Number of (solid) meals:", 1, 15, 1)
 for i in range(n_meals):
     st.markdown(f"**Meal {i+1}**")
 
-    meal_times.append(st.number_input("Time of the meal, relative to first drink (h): ", -12.0, 100.0, start_time, 0.1, key=f"meal_time{i}"))
+    meal_times.append(st.slider("Time of the meal, relative to first drink (h): ", -12.0, 12.0, start_time, 0.1, key=f"meal_time{i}"))
     meal_kcals.append(st.number_input("Kcal of the meal (kcal): ", 0.0, 10000.0, 500.0, 1.0, key=f"meal_kcals{i}"))
     start_time += 6
 
