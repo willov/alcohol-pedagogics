@@ -55,9 +55,10 @@ def simulate(m, anthropometrics, stim, extra_time = 10):
     sim = sund.Simulation(models = m, activities = act, timeunit = 'h')
     
     sim.ResetStatesDerivatives()
-    t_start = min(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])-0.25
 
-    sim.Simulate(timevector = np.linspace(t_start, max(stim["EtOH_conc"]["t"])+extra_time, 10000))
+    t_start = min(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])-0.25
+    t_end = max(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])+extra_time
+    sim.Simulate(timevector = np.linspace(t_start, t_end, 10000))
     
     sim_results = pd.DataFrame(sim.featuredata,columns=sim.featurenames)
     sim_results.insert(0, 'Time', sim.timevector)
@@ -90,8 +91,8 @@ def get_complementary_color(hex_color):
 
 drink_defaults = {
 "Beer" : {"concentration": 5.0, "volume": 0.33, "kcal": 45.0, "length": 20.0},
-"Wine" : {"concentration": 11.0, "volume": 0.15, "kcal": 85.0, "length": 20.0},
-"Spirits" : {"concentration": 40.0, "volume": 0.04, "kcal": 70.0, "length": 1.0/60}
+"Wine" : {"concentration": 11.0, "volume": 0.15, "kcal": 20.0, "length": 20.0},
+"Spirits" : {"concentration": 40.0, "volume": 0.04, "kcal": 0.0, "length": 1.0/60}
 }
 
 def setup_drinks(drink_times, n_drinks, concentration, volume, kcal, length):
