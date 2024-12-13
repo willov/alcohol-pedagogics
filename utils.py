@@ -32,7 +32,7 @@ def flatten(list):
     return [item for sublist in list for item in sublist]
 
 
-def setup_model(model_name):
+def setup_model(model_name="alcohol_model"):
     sund.installModel(f"./models/{model_name}.txt")
     model_class = sund.importModel(model_name)
     model = model_class() 

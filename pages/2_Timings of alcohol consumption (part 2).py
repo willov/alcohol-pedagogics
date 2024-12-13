@@ -19,7 +19,7 @@ from utils import setup_model, drink_specifier, flatten, simulate, add_line, set
 
 # Setup the models
 
-model, model_features = setup_model('alcohol_model')
+model, model_features = setup_model()
 
 
 # Start the app

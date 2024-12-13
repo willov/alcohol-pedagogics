@@ -5,22 +5,13 @@ import numpy as np
 import streamlit as st
 import plotly.graph_objects as go
 
-# Install sund in a custom location
-import subprocess
-import sys
-if "sund" not in os.listdir('./custom_package'):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://www.isbgroup.eu/sund-toolbox/releases/sund-1.2.22.tar.gz'])
-
-sys.path.append('./custom_package')
-import sund
-
 from utils import drink_specifier, flatten, simulate, setup_model, add_line, set_figure_layout, set_default_session_state
 
 # st.elements.utils._shown_default_value_warning=True # This is not a good solution, but it hides the warning of using default values and sessionstate api
 
 # Setup the models
 
-model, model_features = setup_model('alcohol_model')
+model, model_features = setup_model()
 
 # Start the app
 
