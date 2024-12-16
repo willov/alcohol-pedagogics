@@ -9,6 +9,8 @@ import plotly.graph_objects as go
 # Install sund in a custom location
 import subprocess
 import sys
+
+os.makedir('./custom_package', exist_ok=True)
 if "sund" not in os.listdir('./custom_package'):
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://www.isbgroup.eu/sund-toolbox/releases/sund-1.2.22.tar.gz'])
 
@@ -32,10 +34,10 @@ def flatten(list):
     return [item for sublist in list for item in sublist]
 
 
-def setup_model(model_name="alcohol_model"):
+def setup_model(model_name="alcohol_model_28"):
     sund.installModel(f"./models/{model_name}.txt")
     model_class = sund.importModel(model_name)
-    model = model_class() 
+    model = model_class()
 
     features = model.featurenames
     return model, features
