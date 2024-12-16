@@ -75,7 +75,7 @@ sim_results = simulate(model, anthropometrics, stim, extra_time=extra_time)
 sim_results_large_man = simulate(model, avatar_large_male, stim, extra_time=extra_time)
 sim_results_small_woman = simulate(model, avatar_small_female, stim, extra_time=extra_time)
 
-page_button_key = 'show_simulation_1'
+page_button_key = 'show_simulation_3'
 
 # Initialize session state for show_simulation if not already set
 if page_button_key not in st.session_state:
