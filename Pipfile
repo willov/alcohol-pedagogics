@@ -8,7 +8,6 @@ numpy = "*"
 plotly = "*"
 scipy = "*"
 streamlit = "*"
-sund = {file = "https://www.isbgroup.eu/sund-toolbox/releases/sund-1.2.22.tar.gz"}
 pandas = "*"
 
 [dev-packages]
