@@ -224,25 +224,15 @@ urinate             = urinate                       @ 0
 
 ########## FEATURES
 
-EtOH = Blood_Conc_Peripheral                // mg/dL
-EtOH_promille = Blood_Conc_Peripheral/105   // [1 promille = 1.05 mg/ml = 105 mg/dL --> x mg/dL = x/105 promille]
-BrAC_g_dL = Blood_Conc_Central/1000         // used in Javors - BrAC was measured, but the estimated BAC [g/dL] was reported -- [mg/dL = 1e-3g/dL]
+Blood alcohol concentration (mg/dL) = Blood_Conc_Peripheral   // mg/dL
+Blood alcohol concentration (‰) = Blood_Conc_Peripheral/105   // [1 promille = 1.05 mg/ml = 105 mg/dL --> x mg/dL = x/105 promille]
+Breath alcohol concentration (g/dL) = Blood_Conc_Central/1000         // used in Javors - BrAC was measured, but the estimated BAC [g/dL] was reported -- [mg/dL = 1e-3g/dL]
 
-Acetate = Plasma_acetate/10.2               //mg/dL --> mM
-BrAC_g_210L = 0.840*(Blood_Conc_Central/1000) + 0.00367             // BrAC [g/210L = 0.840*BAC[g/dL]+0.00367 => 1e-3*g/dL]
-BrAC_mg_L = ( 0.840*(Blood_Conc_Central/1000) + 0.00367 )*(10/2.1)  // [g/210L = 1000 mg/210L = 1000/210 mg/L = 10/2.1 mg/L]
-Gastric volume = Vol_Stomach*1000           // L->mL
-PEth = PEth                                 // ng/mL
-UAC = (Urine_Mass_EtOH/Urine_Volume)        // mg/dL
-EtG = Peripheral_EtG                        // mg/dL
-EtS = Peripheral_EtS                        // mg/dL
-
-EtOH_Central = Blood_Conc_Central
-
-// reactions for adhoc
-r_ADH    = vADH1*V_Liver                    // mg
-r_CYP2E1 = vCYP2E1*V_Liver                  // mg
-r_UAC    = (r_urine - r_urine_return)       // mg
-r_EtG    = r_EtG*V_Liver                    // mg
-r_EtS    = r_EtS*V_Liver                    // mg
-r_PEth   = r_PEth*1e-4*V_Blood_Peripheral   // mg 1e-4 scales the concentration from [mg/dL] to [ng/mL] --> [10^-6 mg/10^-2 dL = 10^-4 ng/mL]
+Acetate in plasma (mM) = Plasma_acetate/10.2               //mg/dL --> mM
+Breath alcohol concentration (g/210L) = 0.840*(Blood_Conc_Central/1000) + 0.00367             // BrAC [g/210L = 0.840*BAC[g/dL]+0.00367 => 1e-3*g/dL]
+Breath alcohol concentration (mg/L) = ( 0.840*(Blood_Conc_Central/1000) + 0.00367 )*(10/2.1)  // [g/210L = 1000 mg/210L = 1000/210 mg/L = 10/2.1 mg/L]
+Gastric volume (mL) = Vol_Stomach*1000           // L->mL
+PEth (ng/mL) = PEth                                 // ng/mL
+Urine alcohol concentration (mg/dL) = (Urine_Mass_EtOH/Urine_Volume)        // mg/dL
+Ethyl glucuronide; EtG (mg/dL) = Peripheral_EtG                        // mg/dL
+Ethyl sulfate; EtS (mg/dL) = Peripheral_EtS                        // mg/dL
