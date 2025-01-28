@@ -226,13 +226,14 @@ urinate             = urinate                       @ 0
 
 Blood alcohol concentration (mg/dL) = Blood_Conc_Peripheral   // mg/dL
 Blood alcohol concentration (‰) = Blood_Conc_Peripheral/105   // [1 promille = 1.05 mg/ml = 105 mg/dL --> x mg/dL = x/105 promille]
-Breath alcohol concentration (g/dL) = Blood_Conc_Central/1000         // used in Javors - BrAC was measured, but the estimated BAC [g/dL] was reported -- [mg/dL = 1e-3g/dL]
+//Breath alcohol concentration (g/dL) = Blood_Conc_Central/1000         // used in Javors - BrAC was measured, but the estimated BAC [g/dL] was reported -- [mg/dL = 1e-3g/dL]
 
 Acetate in plasma (mM) = Plasma_acetate/10.2               //mg/dL --> mM
 Breath alcohol concentration (g/210L) = 0.840*(Blood_Conc_Central/1000) + 0.00367             // BrAC [g/210L = 0.840*BAC[g/dL]+0.00367 => 1e-3*g/dL]
-Breath alcohol concentration (mg/L) = ( 0.840*(Blood_Conc_Central/1000) + 0.00367 )*(10/2.1)  // [g/210L = 1000 mg/210L = 1000/210 mg/L = 10/2.1 mg/L]
+//Breath alcohol concentration (mg/L) = ( 0.840*(Blood_Conc_Central/1000) + 0.00367 )*(10/2.1)  // [g/210L = 1000 mg/210L = 1000/210 mg/L = 10/2.1 mg/L]
 Gastric volume (mL) = Vol_Stomach*1000           // L->mL
 PEth (ng/mL) = PEth                                 // ng/mL
 Urine alcohol concentration (mg/dL) = (Urine_Mass_EtOH/Urine_Volume)        // mg/dL
+//Urine alcohol concentration (‰) = (Urine_Mass_EtOH/Urine_Volume)/100
 Ethyl glucuronide; EtG (mg/dL) = Peripheral_EtG                        // mg/dL
 Ethyl sulfate; EtS (mg/dL) = Peripheral_EtS                        // mg/dL
