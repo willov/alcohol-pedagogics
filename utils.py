@@ -127,7 +127,7 @@ def drink_picker(consume_time=None):
         beer_time = consume_time
         wine_time = consume_time
 
-    drink_type_selection = st.selectbox("Drink type", [f"Beer (5 % v/v, 33 cl, {beer_time} minutes consumption)", f"Wine (11 % v/v, 15 cl, {wine_time} minutes consumption)", "Spirits (40 % v/v, 4 cl, 1 second consumption)", "Custom"])
+    drink_type_selection = st.selectbox("Drink type", [f"Beer (5 % v/v, 33 cl, {beer_time} minutes consumption)", f"Wine (11 % v/v, 15 cl, {wine_time} minutes consumption)", "Custom"]) # , "Spirits (40 % v/v, 4 cl, 1 second consumption)"
 
     drink_type = drink_type_selection.split(' ')[0]
 
