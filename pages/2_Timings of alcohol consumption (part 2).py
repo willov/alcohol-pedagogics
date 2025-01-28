@@ -103,6 +103,6 @@ if st.session_state[page_button_key_2]:
     st.plotly_chart(fig)
 
     st.markdown(""" ### Questions to reflect over after simulating
-- Whas the difference in peak blood alcohol concentration what you expected?
+- Was the difference in peak blood alcohol concentration what you expected?
 - How much do you need to delay the last drink to not give a higher peak blood alcohol concentration relative to the next-to-last drink?
 """)

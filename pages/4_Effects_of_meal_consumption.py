@@ -65,7 +65,7 @@ sim_results_meal = simulate(model, anthropometrics, stim, extra_time=extra_time)
 
 
 st.markdown("""## Questions to reflect over before simulating
-- Do you think there will be a difference between drinking on an empty stomach or after having eating?
+- Do you think there will be a difference between drinking on an empty stomach or after having eaten?
 - If so, what do you think will be the difference?
             
 When you are ready, press the "Show simulation" button below to see the results.
