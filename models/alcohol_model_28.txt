@@ -1,5 +1,5 @@
 ########## NAME
-alcohol_model_UAC_EtG_EtS_28
+alcohol_model_28
 
 ########## METADATA
 timeunit = m
