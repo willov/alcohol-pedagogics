@@ -16,7 +16,7 @@ dependencies = [
 requires-dist = [
     { name = "plotly", specifier = ">=6.0.1" },
     { name = "streamlit", specifier = ">=1.45.0" },
-    { name = "sund", url = "https://isbgroup.eu/sund-toolbox/releases/sund-1.5.1.tar.gz" },
+    { name = "sund", url = "https://isbgroup.eu/sund-toolbox/releases/sund-1.6.1.tar.gz" },
 ]
 
 [[package]]
@@ -513,13 +513,13 @@ wheels = [
 
 [[package]]
 name = "sund"
-version = "1.5.1"
-source = { url = "https://isbgroup.eu/sund-toolbox/releases/sund-1.5.1.tar.gz" }
+version = "1.6.1"
+source = { url = "https://isbgroup.eu/sund-toolbox/releases/sund-1.6.1.tar.gz" }
 dependencies = [
     { name = "numpy" },
     { name = "setuptools" },
 ]
-sdist = { hash = "sha256:426964a10d01fe00d1f2c36be2bb0baaf93e1fba36eb0b1b97f523e1be792e65" }
+sdist = {url = "https://isbgroup.eu/sund-toolbox/releases/sund-1.6.1.tar.gz", hash = "sha256:2fb3a3a6f46d6793a7075f06008991771546de439595b56e112229685daf7df3" }
 
 [package.metadata]
 requires-dist = [

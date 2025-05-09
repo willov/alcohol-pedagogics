@@ -44,7 +44,7 @@ def simulate(m, anthropometrics, stim, extra_time = 10):
     
     t_start = min(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])-0.25
     t_end = max(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])+extra_time
-    sim = sund.Simulation(models = m, activities = act, time_unit = 'h', time_vector = np.linspace(t_start, t_end, 100000))
+    sim = sund.Simulation(models = m, activities = act, time_unit = 'h', time_vector = np.linspace(t_start, t_end, 100000), augment_time_vector = False)
     sim.simulate(reset = True)
     
     sim_results = pd.DataFrame(sim.feature_data,columns=sim.feature_names)
