@@ -9,7 +9,7 @@ import plotly.graph_objects as go
 import subprocess
 import sys
 if "sund" not in os.listdir('./custom_package'):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://www.isbgroup.eu/sund-toolbox/releases/sund-1.2.22.tar.gz'])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://www.isbgroup.eu/sund-toolbox/releases/sund-1.6.1.tar.gz'])
 
 sys.path.append('./custom_package')
 import sund

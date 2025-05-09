@@ -8,7 +8,7 @@ import os
 
 os.makedirs('./custom_package', exist_ok=True)
 if "sund" not in os.listdir('./custom_package'):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://www.isbgroup.eu/sund-toolbox/releases/sund-1.2.22.tar.gz'])
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://www.isbgroup.eu/sund-toolbox/releases/sund-1.6.1.tar.gz'])
 
 
 st.title("Visualizing different risks related to alcohol consumption")
