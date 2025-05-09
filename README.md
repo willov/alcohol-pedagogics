@@ -9,7 +9,7 @@ The prototype is hosted at [https://alcohol-pedagogics.streamlit.app](https://al
 pipenv install
 ```
 
-Then run the application by running `streamlit run Home.py` in the terminal. 
+Then run the application by running `streamlit run Home.py` in the terminal.
 
 Please note that the application can take a few minutes to start up, primarily when running at [https://alcohol-pedagogics.streamlit.app](https://alcohol-pedagogics.streamlit.app), but also locally. Also note that a valid C-compiler is necessary for running the application locally.
 
