@@ -42,13 +42,10 @@ def simulate(m, anthropometrics, stim, extra_time = 10):
         if key != "avatar_color":
             act.add_output(name = key, type="constant", f = val) 
     
-    sim = sund.Simulation(models = m, activities = act, time_unit = 'h')
-    
-    sim.reset_states()
-
     t_start = min(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])-0.25
     t_end = max(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])+extra_time
-    sim.simulate(time_vector = np.linspace(t_start, t_end, 100000))
+    sim = sund.Simulation(models = m, activities = act, time_unit = 'h', time_vector = np.linspace(t_start, t_end, 100000))
+    sim.simulate(reset = True)
     
     sim_results = pd.DataFrame(sim.feature_data,columns=sim.feature_names)
     sim_results.insert(0, 'Time', sim.time_vector)
