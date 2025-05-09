@@ -5,16 +5,6 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
-
-# Install sund in a custom location
-import subprocess
-import sys
-
-os.makedirs('./custom_package', exist_ok=True)
-if "sund" not in os.listdir('./custom_package'):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://www.isbgroup.eu/sund-toolbox/releases/sund-1.6.1.tar.gz'])
-
-sys.path.append('./custom_package')
 import sund
 
 
@@ -35,35 +25,33 @@ def flatten(list):
 
 
 def setup_model(model_name="alcohol_model_28"):
-    sund.installModel(f"./models/{model_name}.txt")
-    model_class = sund.importModel(model_name)
+    sund.install_model(f"./models/{model_name}.txt")
+    model_class = sund.import_model(model_name)
     model = model_class()
 
-    features = model.featurenames
+    features = model.feature_names
     return model, features
 
 
 def simulate(m, anthropometrics, stim, extra_time = 10):
-    act = sund.Activity(timeunit = 'h')
-    pwc = sund.PIECEWISE_CONSTANT # space saving only
-    const = sund.CONSTANT # space saving only
+    act = sund.Activity(time_unit = 'h')
 
     for key,val in stim.items():
-        act.AddOutput(name = key, type=pwc, tvalues = val["t"], fvalues = val["f"]) 
+        act.add_output(name = key, type="piecewise_constant", t = val["t"], f = val["f"]) 
     for key,val in anthropometrics.items():
         if key != "avatar_color":
-            act.AddOutput(name = key, type=const, fvalues = val) 
+            act.add_output(name = key, type="constant", f = val) 
     
-    sim = sund.Simulation(models = m, activities = act, timeunit = 'h')
+    sim = sund.Simulation(models = m, activities = act, time_unit = 'h')
     
-    sim.ResetStatesDerivatives()
+    sim.reset_states()
 
     t_start = min(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])-0.25
     t_end = max(stim["EtOH_conc"]["t"]+stim["kcal_solid"]["t"])+extra_time
-    sim.Simulate(timevector = np.linspace(t_start, t_end, 100000))
+    sim.simulate(time_vector = np.linspace(t_start, t_end, 100000))
     
-    sim_results = pd.DataFrame(sim.featuredata,columns=sim.featurenames)
-    sim_results.insert(0, 'Time', sim.timevector)
+    sim_results = pd.DataFrame(sim.feature_data,columns=sim.feature_names)
+    sim_results.insert(0, 'Time', sim.time_vector)
 
     t_start_drink = min(stim["EtOH_conc"]["t"])-0.25
 

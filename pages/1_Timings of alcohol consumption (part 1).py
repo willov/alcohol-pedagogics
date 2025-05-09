@@ -9,7 +9,6 @@ from utils import setup_model, drink_specifier, flatten, simulate, add_line, set
 # st.elements.utils._shown_default_value_warning=True # This is not a good solution, but it hides the warning of using default values and sessionstate api
 
 # Setup the models
-
 model, model_features = setup_model()
 
 

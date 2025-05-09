@@ -32,6 +32,7 @@ anthropometrics = {"sex": st.session_state['sex'],
 anthropometrics["sex"] = float(anthropometrics["sex"].lower() in ["male", "man", "men", "boy", "1", "chap", "guy"]) #Converts to a numerical representation
 
 st.divider()
+
 # Specifying the drinks
 stim, extra_time = drink_specifier()
 
