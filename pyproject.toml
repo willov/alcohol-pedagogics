@@ -1,7 +1,7 @@
 [project]
 name = "alcohol-pedagogics"
 version = "0.1.0"
-description = "Add your description here"
+description = "Visualize the effects of alcohol, using the SUND Toolbox"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
