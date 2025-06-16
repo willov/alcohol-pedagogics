@@ -533,7 +533,7 @@ dependencies = [
     { name = "numpy" },
     { name = "setuptools" },
 ]
-sdist = { hash = "sha256:a7114afd27b633f986ac1982ee5cd2e553f65e9c0307e3de6ad2bac68726cea7" }
+sdist = { url = "https://isbgroup.eu/sund-toolbox/releases/sund-1.8.2.tar.gz", hash = "sha256:a7114afd27b633f986ac1982ee5cd2e553f65e9c0307e3de6ad2bac68726cea7" }
 
 [package.metadata]
 requires-dist = [
