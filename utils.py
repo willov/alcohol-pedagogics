@@ -23,9 +23,10 @@ def set_default_session_state(session_state):
 def flatten(list):
     return [item for sublist in list for item in sublist]
 
-@st.cache_resource(show_spinner="Compiling model...")
 def setup_model(model_name="alcohol_model_28"):
-    sund.install_model(f"./models/{model_name}.txt")
+    if model_name not in sund.installed_models():
+        sund.install_model(f"./models/{model_name}.txt")
+        
     model_class = sund.import_model(model_name)
     model = model_class()
 
