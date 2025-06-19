@@ -5,6 +5,15 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
+
+# Install sund in a custom location
+import subprocess
+import sys
+os.makedirs('./custom_package', exist_ok=True)
+if "sund" not in os.listdir('./custom_package'):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "--target=./custom_package", 'https://isbgroup.eu/sund-toolbox/releases/sund-1.8.3.tar.gz'])
+
+sys.path.append('./custom_package')
 import sund
 
 

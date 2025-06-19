@@ -1,6 +1,8 @@
 
 import streamlit as st
 
+import utils
+
 st.title("Visualizing different risks related to alcohol consumption")
 st.markdown("""These exercises are ment to showcase different risks related to alcohol consumption. The intent is to bring awareness to the risks involved to improve the health of the population. 
             

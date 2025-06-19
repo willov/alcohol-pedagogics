@@ -5,10 +5,8 @@ description = "Visualize the effects of alcohol, using the SUND Toolbox"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "pip>=25.1.1",
     "plotly>=6.0.1",
+    "setuptools>=80.9.0",
     "streamlit>=1.45.0",
-    "sund",
 ]
-
-[tool.uv.sources]
-sund = { url = "https://isbgroup.eu/sund-toolbox/releases/sund-1.8.3.tar.gz" }
